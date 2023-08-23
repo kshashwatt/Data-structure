@@ -1,0 +1,164 @@
+  #ARRAY
+
+    public class ArrayBasic {
+    public static void main(String[] args) {
+        // Declare and initialize an array of integers
+        int[] numbers = new int[5]; 
+        
+        // Assign values to array elements
+        numbers[0] = 10;
+        numbers[1] = 20;
+        numbers[2] = 30;
+        numbers[3] = 40;
+        numbers[4] = 50;
+        
+        //print array elements
+        System.out.println("Element at index 0: " + numbers[0]);
+        System.out.println("Element at index 2: " + numbers[2]);
+        
+        // Calculate and print the sum of array elements
+        int sum = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            sum += numbers[i];
+        }
+        System.out.println("Sum of array elements: " + sum);
+    }
+}
+
+//loop
+
+public class ForLoop{
+    public static void main(String[] args) {
+        int[] arr = new int[4];
+        arr[0] = 1;
+        arr[1] = 2;
+        arr[2] = 3;
+        arr[3] = 4;
+        for(int ele : arr){
+            System.out.print(ele);
+        }
+        System.out.println();
+        for(int it = 0;it<arr.length;it++){
+            System.out.print(arr[it]);
+        }
+        System.out.println();
+        int i=0;
+        while(i<arr.length){
+            System.out.print(arr[i]);
+            i++;
+        }
+        i=0;
+        System.out.println();
+        do{
+            System.out.print(arr[i]);
+            i++;
+        }while(i<arr.length);
+    }
+}
+//3D array
+
+public class multiDimensional {
+	public static void main(String args[])
+	{
+		// declaring and initializing 2D array
+		int arr[][]
+			= { { 2, 7, 9 }, { 3, 6, 1 }, { 7, 4, 2 } };
+
+		// printing 2D array
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++)
+				System.out.print(arr[i][j] + " ");
+
+			System.out.println();
+		}
+	}
+}
+
+#SORTING
+
+class MergeSort {
+    public static void conquer(int arr[], int si, int mid, int ei) {
+        int merged[] = new int[ei - si + 1];
+        int index1 = si;
+        int index2 = mid + 1;
+        int x = 0;
+
+        while (index1 <= mid && index2 <= ei) {
+            if (arr[index1] <= arr[index2]) {  // Use <= for ascending order
+                merged[x++] = arr[index1++];
+            } else {
+                merged[x++] = arr[index2++];
+            }
+        }
+        while (index1 <= mid) {
+            merged[x++] = arr[index1++];
+        }
+        while (index2 <= ei) {
+            merged[x++] = arr[index2++];
+        }
+        for (int i = si; i <= ei; i++) {
+            arr[i] = merged[i - si];
+        }
+    }
+
+    public static void divide(int arr[], int si, int ei) {
+        if (si >= ei) {
+            return;
+        }
+        int mid = si + (ei - si) / 2;
+        divide(arr, si, mid);
+        divide(arr, mid + 1, ei);
+        conquer(arr, si, mid, ei);
+    }
+
+    public static void main(String args[]) {
+        int arr[] = {2, 7, 8, 2, 8, 55, 77, 221};
+        int n = arr.length;
+        divide(arr, 0, n - 1); // Start si from 0
+
+        System.out.println("The sorted array in ascending order:");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
+ 
+ #Quick sort
+
+ class QuickSort {
+
+    public static void main(String[] args) {
+        int[] arr = { 9, 5, 1, 8, 3, 7, 6 };
+        quickSort(arr, 0, arr.length - 1);
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(arr, low, high);
+            quickSort(arr, low, pivotIndex - 1);
+            quickSort(arr, pivotIndex + 1, high);
+        }
+    }
+
+    public static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return i + 1;
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
